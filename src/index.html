@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HLS Web Player</title>
+  <style>
+    body {
+      font-family: Calibri, sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    #videoContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60vh;
+      background-color: #000;
+    }
+    video {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    #controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+    }
+    #urlInput {
+      width: 300px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #loadButton, #clearLogs {
+      background-color: #800080;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    #loadButton:hover, #clearLogs:hover {
+      background-color: #4b0082;
+    }
+    #playlistSelect, #bitrateButtons {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    #bitrateButtons button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #800080;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+    #bitrateButtons button:hover {
+      background-color: #4b0082;
+      border-color: #4b0082;
+    }
+    #videoInfo {
+      margin: 20px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      max-width: 600px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+    .info-label {
+      font-weight: bold;
+    }
+    #urlList {
+      margin: 20px;
+      max-height: 200px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 4px;
+    }
+    h3 {
+      margin-top: 0;
+    }
+    ul {
+      padding: 0;
+      list-style-type: none;
+    }
+    li {
+      padding: 5px 0;
+    }
+    .label-bold {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="videoContainer">
+    <video id="video" controls></video>
+  </div>
+  <div id="controls">
+    <label for="urlInput" class="label-bold">Source URL:</label>
+    <input type="text" id="urlInput" placeholder="Enter your video URL">
+    <button id="loadButton">Load</button>
+    <br><br>
+    <label for="playlistSelect" class="label-bold">Choose video:</label>
+    <select id="playlistSelect">
+      <option value="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8">Sample 1</option>
+      <option value="http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8">Sample 2</option>
+      <option value="https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8">Sample 3</option>
+      <option value="http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8">Sample 4</option>
+    </select>
+    <br>
+    <label for="bitrateButtons" class="label-bold">Choose resolution:</label>
+    <div id="bitrateButtons"></div>
+  </div>
+  <div id="videoInfo"></div>
+  <div id="urlList">
+    <h3>Requested URLs:</h3>
+    <ul id="urlLogs"></ul>
+    <button id="clearLogs">Clear</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="player.js"></script>
+</body>
+</html>
